@@ -1,0 +1,100 @@
+{
+  "name": "skyminions",
+  "version": "1.0.0",
+  "description": "El asistente perfecto para administrar a detalle tus minions, del skyblock hypixel",
+  "main": "dist/bundle.cjs.js",
+  "module": "dist/bundle.esm.js",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "rollup -c",
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "prettier-eslint '**/*.js' --write",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test:staged": "jest --findRelatedTests",
+    "storybook": "start-storybook -c storybook",
+    "prestorybook:build": "rm -rf storybook-static",
+    "storybook:build": "build-storybook -c storybook",
+    "storybook:serve": "serve storybook-static",
+    "predeploy": "npm run storybook:build",
+    "deploy": "gh-pages -d storybook-static",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngelSFlores/skyminions.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:fix",
+      "npm run test:staged",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "minecraft",
+    "skyblock",
+    "hypixel",
+    "minions"
+  ],
+  "author": "Miguel Angel Suarez Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngelSFlores/skyminions/issues"
+  },
+  "homepage": "https://github.com/AngelSFlores/skyminions#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/react": "^5.1.9",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "coveralls": "^3.0.4",
+    "eslint": "^6.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^22.7.1",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "gh-pages": "^2.0.1",
+    "husky": "^2.4.1",
+    "jest": "^24.8.0",
+    "lint-staged": "^8.2.1",
+    "prettier-eslint": "^9.0.0",
+    "prettier-eslint-cli": "^5.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6",
+    "rollup": "^1.16.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.0.4",
+    "rollup-plugin-string": "^3.0.0",
+    "rollup-plugin-terser": "^5.0.0",
+    "serve": "^11.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.2"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.css$": "<rootDir>/mocks/styles.js"
+    }
+  }
+}
